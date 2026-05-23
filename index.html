@@ -31,6 +31,10 @@
             }
         .header {
             font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
             margin-bottom: 10px;
             border: 1px solid #ccc;
             min-height: 50px;
@@ -60,6 +64,8 @@
         }
         .opt-jenis-bangunan, .opt-jumlah-lantai, .opt-luas-bangunan {
             visibility: hidden;
+            display: flex;
+            flex-direction: column;
             position: absolute;
             top: 20px;
             left: 50%;
@@ -99,7 +105,7 @@
             <button class="jenis-bangunan">Jenis Bangunan</button>
             <button class="jumlah-lantai">Jumlah Lantai</button>
             <button class="luas-bangunan">Luas Bangunan</button>
-            <button class="test">Test</button>
+            <!-- <button class="test">Test</button> -->
         </div>    
     </div>
     
@@ -139,7 +145,7 @@
     const ojl_2_Btn = document.querySelector('.ojl2');
     const ojl_3_Btn = document.querySelector('.ojl3');
     const ojl_4_Btn = document.querySelector('.ojl4');
-    const testBtn = document.querySelector('.test');
+    // const testBtn = document.querySelector('.test');
 
     const data = {
         "RUKO / RUMAH KOST / KLINIK PRATAMA": {
