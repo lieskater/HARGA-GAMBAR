@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Harga Gambar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            color: #666;
+        }
+        .BG{
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+        }
+        .mobile-screen {
+                background-color: #f0f0f0;
+                padding: 20px;
+                border-radius: 10px;
+                width: 600px;
+                border: 1px solid #ccc;
+                
+            }
+        .header {
+            font-size: 20px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            min-height: 50px;
+        }
+        .nominal {
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            margin-bottom: 100px;
+            border: 1px solid #ccc;
+            min-height: 100px;
+        }
+        .jenis-bangunan, .jumlah-lantai, .luas-bangunan {
+            font-size: 20px;
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            min-height: 100px;
+        }
+        .opt-jenis-bangunan, .opt-jumlah-lantai, .opt-luas-bangunan {
+            visibility: hidden;
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            padding: 10px;
+            background-color: #e0e0e0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 600px;
+            height: 700px;
+        }
+        .ojb1, .ojb2, .ojb3, .ojb4, .back-ojb, .back-ojl, .back-olb, 
+        .ojl1, .ojl2, .ojl3, .ojl4, .olb1, .olb2, .olb3, .olb4, .olb5, .olb6
+        {
+            font-size: 20px;
+            display: block;
+            min-height: 100px;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #28A745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+    </style>
+
+</head>
+<body>
+    <div class="BG">
+        <div class="mobile-screen">
+            <h1 class="header">Harga Gambar</h1>
+            <h1 class="nominal">Nominal</h1>
+            <button class="jenis-bangunan">Jenis Bangunan</button>
+            <button class="jumlah-lantai">Jumlah Lantai</button>
+            <button class="luas-bangunan">Luas Bangunan</button>
+            <button class="test">Test</button>
+        </div>    
+    </div>
+    
+    <div class="opt-jenis-bangunan">opt-jenis-bangunan
+        <button class="ojb1">RUKO / RUMAH KOST / KLINIK PRATAMA</button>
+        <button class="ojb2">KANTOR / RESTORAN</button>
+        <button class="ojb3">GUDANG / GSG</button>
+        <button class="ojb4">SHOWROOM / HOTEL / SEKOLAH / KLINIK UTAMA</button>
+        <button class="back-ojb">Back</button>
+    </div>
+    <div class="opt-jumlah-lantai">opt-jumlah-lantai
+        <button class="ojl1">1 LT</button>
+        <button class="ojl2">2 LT</button>
+        <button class="ojl3">3 LT</button>
+        <button class="ojl4">4 LT</button>
+        <button class="back-ojl">Back</button>
+    </div>
+    <div class="opt-luas-bangunan">opt-luas-bangunan
+    </div>
+
+
+<script>
+    const jenisBangunanBtn = document.querySelector('.jenis-bangunan');
+    const jumlahLantaiBtn = document.querySelector('.jumlah-lantai');
+    const luasBangunanBtn = document.querySelector('.luas-bangunan');
+    const opt_jenis_bangunanDiv = document.querySelector('.opt-jenis-bangunan');
+    const opt_jumlah_lantaiDiv = document.querySelector('.opt-jumlah-lantai');
+    const opt_luas_bangunanDiv = document.querySelector('.opt-luas-bangunan');
+    const backOjbBtn = document.querySelector('.back-ojb');
+    const backOjlBtn = document.querySelector('.back-ojl');
+    // const backOlbBtn = document.querySelector('.back-olb');
+    const ojb_1_Btn = document.querySelector('.ojb1');
+    const ojb_2_Btn = document.querySelector('.ojb2');
+    const ojb_3_Btn = document.querySelector('.ojb3');
+    const ojb_4_Btn = document.querySelector('.ojb4');
+    const ojl_1_Btn = document.querySelector('.ojl1');
+    const ojl_2_Btn = document.querySelector('.ojl2');
+    const ojl_3_Btn = document.querySelector('.ojl3');
+    const ojl_4_Btn = document.querySelector('.ojl4');
+    const testBtn = document.querySelector('.test');
+
+    const data = {
+        "RUKO / RUMAH KOST / KLINIK PRATAMA": {
+            "2 LT": {
+                "1 - 250": "Rp900,000.00",
+                "251 - 400": "Rp1,200,000.00",
+                "401 - 600": "Rp1,500,000.00",
+                "601 - 800": "Rp1,800,000.00",
+                "801 - 1000": "Rp2,000,000.00",
+                "1001 +": "Rp2,500,000.00"
+            },
+            "3 LT": {
+                "1 - 250": "Rp1,200,000.00",
+                "251 - 400": "Rp1,500,000.00",
+                "401 - 600": "Rp1,800,000.00",
+                "601 - 800": "Rp2,100,000.00",
+                "801 - 1000": "Rp2,400,000.00",
+                "1001 +": "Rp3,000,000.00"
+            },
+            "4 LT": {
+                "1 - 300": "Rp2,000,000.00",
+                "301 - 500": "Rp2,300,000.00",
+                "501 - 700": "Rp2,600,000.00",
+                "701 - 900": "Rp2,900,000.00",
+                "901 - 1000": "Rp3,500,000.00",
+                "1000 +": "Rp4,000,000.00"
+            },
+            "5 LT": {
+                "1 - 400": "Rp3,000,000.00",
+                "401 - 600": "Rp3,300,000.00",
+                "601 - 800": "Rp3,600,000.00",
+                "801 - 1000": "Rp3,900,000.00",
+                "1000 +": "Rp4,500,000.00"
+            }},
+        "KANTOR / RESTORAN": {
+            "2 LT": {
+                "1 - 250": "Rp1,200,000.00",
+                "251 - 400": "Rp1,500,000.00",
+                "401 - 600": "Rp1,800,000.00",
+                "601 - 800": "Rp2,100,000.00",
+                "801 - 1000": "Rp2,400,000.00",
+                "1001 +": "Rp2,700,000.00"
+            },
+            "3 LT": {
+                "1 - 250": "Rp1,500,000.00",
+                "251 - 400": "Rp1,800,000.00",
+                "401 - 600": "Rp2,100,000.00",
+                "601 - 800": "Rp2,400,000.00",
+                "801 - 1000": "Rp2,700,000.00",
+                "1001 +": "Rp3,000,000.00"
+            },
+            "4 LT": {
+                "1 - 300": "Rp2,500,000.00",
+                "301 - 500": "Rp2,800,000.00",
+                "501 - 700": "Rp3,100,000.00",
+                "701 - 900": "Rp3,400,000.00",
+                "900 - 1000": "Rp3,700,000.00",
+                "1000 +": "Rp4,000,000.00"
+            },
+            "5 LT": {
+                "1 - 400": "Rp3,500,000.00",
+                "401 - 600": "Rp3,800,000.00",
+                "601 - 800": "Rp4,100,000.00",
+                "801 - 1000": "Rp4,400,000.00",
+                "1000 +": "Rp4,700,000.00"
+            }},
+        "GUDANG / GSG": {
+            "1 LT": {
+                "1 - 250": "Rp1,200,000.00",
+                "251 - 400": "Rp1,500,000.00",
+                "401 - 600": "Rp1,800,000.00",
+                "601 - 800": "Rp2,100,000.00",
+                "801 - 1000": "Rp2,400,000.00",
+                "1001 +": "Rp2,700,000.00"
+            },
+            "2 LT": {
+                "1 - 250": "Rp1,500,000.00",
+                "251 - 400": "Rp1,800,000.00",
+                "401 - 600": "Rp2,100,000.00",
+                "601 - 800": "Rp2,400,000.00",
+                "801 - 1000": "Rp2,700,000.00",
+                "1001 +": "Rp3,000,000.00"
+            },
+            "3 LT": {
+                "1 - 300": "Rp2,000,000.00",
+                "301 - 500": "Rp2,300,000.00",
+                "501 - 700": "Rp2,600,000.00",
+                "701 - 900": "Rp2,900,000.00",
+                "901 - 1000": "Rp3,500,000.00",
+                "1000 +": "Rp4,000,000.00"
+            },
+            "4 LT": {
+                "1 - 400": "Rp3,000,000.00",
+                "401 - 600": "Rp3,300,000.00",
+                "601 - 800": "Rp3,600,000.00",
+                "801 - 1000": "Rp3,900,000.00",
+                "1000 +": "Rp4,500,000.00"
+            }},
+        "SHOWROOM / HOTEL / SEKOLAH / KLINIK UTAMA": {
+            "1 LT": {
+                "1 - 250": "Rp1,500,000.00",
+                "251 - 400": "Rp1,800,000.00",
+                "401 - 600": "Rp2,100,000.00",
+                "601 - 800": "Rp2,400,000.00",
+                "801 - 1000": "Rp2,700,000.00",
+                "1001 +": "Rp3,500,000.00"
+            },
+            "2 LT": {
+                "1 - 250": "Rp2,000,000.00",
+                "251 - 400": "Rp2,300,000.00",
+                "401 - 600": "Rp2,600,000.00",
+                "601 - 800": "Rp2,900,000.00",
+                "801 - 1000": "Rp3,200,000.00",
+                "1001 +": "Rp4,000,000.00"
+            },
+            "3 LT": {
+                "1 - 300": "Rp2,500,000.00",
+                "301 - 500": "Rp2,800,000.00",
+                "501 - 700": "Rp3,100,000.00",
+                "701 - 900": "Rp3,400,000.00",
+                "900 - 1000": "Rp3,700,000.00",
+                "1000 +": "Rp4,500,000.00"
+            },
+            "4 LT": {
+                "1 - 400": "Rp3,500,000.00",
+                "401 - 600": "Rp3,800,000.00",
+                "601 - 800": "Rp4,100,000.00",
+                "801 - 1000": "Rp4,400,000.00",
+                "1000 +": "Rp5,000,000.00"
+            }}
+        }
+    
+    let select = {
+        jenis_bangunan: null,
+        jumlah_lantai: null,
+        luas_bangunan: null
+    };
+
+    function hideAllOptions() {
+        opt_jenis_bangunanDiv.style.visibility = 'hidden';
+        opt_jumlah_lantaiDiv.style.visibility = 'hidden';
+        opt_luas_bangunanDiv.style.visibility = 'hidden';
+        updateHarga();
+    }
+    function setJenisBangunan(jenis) {
+        select.jenis_bangunan = jenis;
+        jenisBangunanBtn.textContent = jenis;
+        hideAllOptions();
+    }
+    function setJumlahLantai(jumlah) {
+        select.jumlah_lantai = jumlah;
+        jumlahLantaiBtn.textContent = jumlah;
+        hideAllOptions();
+    }
+    
+
+    jenisBangunanBtn.addEventListener('click', () => {
+        opt_jenis_bangunanDiv.style.visibility = 'visible';
+    });
+
+        ojb_1_Btn.addEventListener('click', () => {
+            setJenisBangunan('RUKO / RUMAH KOST / KLINIK PRATAMA');
+        });
+
+        ojb_2_Btn.addEventListener('click', () => {
+            setJenisBangunan('KANTOR / RESTORAN');
+        });
+
+        ojb_3_Btn.addEventListener('click', () => {
+            setJenisBangunan('GUDANG / GSG');
+        });
+
+        ojb_4_Btn.addEventListener('click', () => {
+            setJenisBangunan('SHOWROOM / HOTEL / SEKOLAH / KLINIK UTAMA');
+        });
+
+        backOjbBtn.addEventListener('click', () => {
+            hideAllOptions();
+        });
+    jumlahLantaiBtn.addEventListener('click', () => {
+        opt_jumlah_lantaiDiv.style.visibility = 'visible';
+    });
+        ojl_1_Btn.addEventListener('click', () => {
+            setJumlahLantai('1 LT');
+        });
+        ojl_2_Btn.addEventListener('click', () => {
+            setJumlahLantai('2 LT');
+        });
+        ojl_3_Btn.addEventListener('click', () => {
+            setJumlahLantai('3 LT');
+        });
+        ojl_4_Btn.addEventListener('click', () => {
+            setJumlahLantai('4 LT');
+        });
+
+        backOjlBtn.addEventListener('click', () => {
+            hideAllOptions();
+        });
+  
+
+
+    luasBangunanBtn.addEventListener('click', () => {
+        
+        opt_luas_bangunanDiv.style.visibility = 'visible';
+        if (select.jenis_bangunan && select.jumlah_lantai){
+            addLuasBangunanOptions();
+        }
+        else{
+            alert('Pilih jenis bangunan dan jumlah lantai terlebih dahulu!');
+            hideAllOptions();
+        }
+              
+    });
+          
+    let opt = [];
+
+        function addLuasBangunanOptions() {
+            opt_luas_bangunanDiv.innerHTML = '';
+            opt.push(data[select.jenis_bangunan][select.jumlah_lantai]);
+            const optLength = Object.keys(opt[0]).length
+            for (let i = 1; i <= optLength; i++) {
+                const luasRange = Object.keys(opt[0])[i-1];
+                const harga = opt[0][luasRange];
+                const optionHTML = `<button class="olb${i}" onclick="luasBangunanBtn.textContent = '${luasRange}'; hideAllOptions();updateHarga()">${luasRange}</button>`;
+                opt_luas_bangunanDiv.insertAdjacentHTML('beforeend', optionHTML);
+                
+            }
+                       
+            opt_luas_bangunanDiv.insertAdjacentHTML('beforeend', '<button class="back-olb" onclick="hideAllOptions()">Back</button>');
+
+            
+                
+            }
+        function updateHarga() {
+            const harga = data[select.jenis_bangunan][select.jumlah_lantai][luasBangunanBtn.textContent];
+            document.querySelector('.nominal').textContent = harga;
+            console.log(select);
+        }
+    
+
+    testBtn.addEventListener('click', () => {
+        console.log(select);
+    });
+
+</script>
+</body>
+</html>
